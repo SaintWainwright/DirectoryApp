@@ -54,5 +54,26 @@ namespace DirectoryApp.ViewModels
             get { return _DateToday; }
             set { _DateToday = value; }
         }
+
+        private string _MobileNoEntry;
+        public string MobileNoEntry
+        {
+            get { return _MobileNoEntry; }
+            set
+            {
+                _MobileNoEntry = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(_MobileNoEntry));
+                int intOnly;
+                if ((int.TryParse(value, out intOnly)) || String.IsNullOrEmpty(_MobileNoEntry))
+                {
+                    NewStudent.MobileNo = intOnly.ToString();
+                }
+                else
+                {
+                    Application.Current.MainPage.DisplayAlert("Mobile No", "Number Input Only", "Okay");
+                }
+            }
+        }
     }
 }

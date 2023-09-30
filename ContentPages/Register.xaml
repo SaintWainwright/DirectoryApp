@@ -90,13 +90,12 @@
                     <Border Style="{StaticResource BorderEntryStyle}">
                         <DatePicker MaximumDate="{Binding DateToday}" Date="{Binding NewStudent.BirthDate}" Style="{StaticResource DatePickerEntryStyle}" Format="mm/dd/yyyy"/>
                     </Border>
-                    <Label Text="{Binding NewStudent.BirthDate}"/>
                 </HorizontalStackLayout>
                 <!--MOBILE NO-->
                 <HorizontalStackLayout>
                     <Label Text="Mobile No." Style="{StaticResource LabelStyle}"/>
                     <Border Style="{StaticResource BorderEntryStyle}">
-                        <Entry Text="{Binding NewStudent.MobileNo}" Style="{StaticResource EntryStyle}" ToolTipProperties.Text="Number Input"/>
+                        <Entry Text="{Binding MobileNoEntry}" Style="{StaticResource EntryStyle}" ToolTipProperties.Text="Number Input"/>
                     </Border>
                 </HorizontalStackLayout>
                 <!--CITY-->
