@@ -1,7 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="DirectoryApp.MainPage">
+             x:Class="DirectoryApp.MainPage"
+             xmlns:viewmodel="clr-namespace:DirectoryApp.ViewModels"
+             x:DataType="viewmodel:MainPage_ViewModel">
+
     
     <VerticalStackLayout
         HorizontalOptions="Center"
@@ -56,6 +59,9 @@
             Margin="0,0,0,10">
             <Label
                 Text="New user? Register here" TextColor="Blue" TextDecorations="Underline">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OnNewUserCommand}"/>
+                </Label.GestureRecognizers>
             </Label>
         </HorizontalStackLayout>
         <!--Login Output-->

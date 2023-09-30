@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DirectoryApp.ContentPages;
 using System.Windows.Input;
 
 namespace DirectoryApp.ViewModels
@@ -62,5 +63,11 @@ namespace DirectoryApp.ViewModels
             }
         }
         public ICommand OnLoginCommand => new Command(OnLogin);
+
+        private void OnNewUser()
+        {
+            Shell.Current.GoToAsync(nameof(Register));
+        }
+        public ICommand OnNewUserCommand => new Command(OnNewUser);
     }
 }
