@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DirectoryApp.View
 {
-    class Student : MainViewModel
+    public class Student : MainViewModel
     {
         private int studentID;
         private string firstName;
@@ -26,7 +26,7 @@ namespace DirectoryApp.View
         public int StudentID
         {
             get { return studentID; }
-            set { studentID = value; OnPropertyChanged(); OnPropertyChanged(nameof(studentID));  }
+            set { studentID = value; OnPropertyChanged(); OnPropertyChanged(nameof(studentID)); }
         }
         public string FirstName
         {

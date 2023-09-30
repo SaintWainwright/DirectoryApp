@@ -2,11 +2,179 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DirectoryApp.ContentPages.Register"
-             Title="Register">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+             Title="Register"
+             xmlns:viewmodel="clr-namespace:DirectoryApp.ViewModels"
+             x:DataType="viewmodel:Register_ViewModel">
+    
+    <ContentPage.Resources>
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Setter Property="WidthRequest" Value="125"/>
+            <Setter Property="Padding" Value="0,13"/>
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+        </Style>
+        <Style x:Key="EntryStyle" TargetType="Entry">
+            <Setter Property="WidthRequest" Value="200"/>
+        </Style>
+        <Style x:Key="BorderEntryStyle" TargetType="Border">
+            <Setter Property="Margin" Value="0,2.5"/>
+        </Style>
+    </ContentPage.Resources>
+    
+    <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+        <HorizontalStackLayout>
+            <!--Column 1-->
+            <VerticalStackLayout Margin="0,0,30,0">
+                <!--TAGS-->
+                <VerticalStackLayout Margin="0,0,40,0">
+                     <!--STUDENT ID-->
+                    <HorizontalStackLayout>
+                        <Label Text="Student ID" Style="{StaticResource LabelStyle}"/>
+                        <Border Style="{StaticResource BorderEntryStyle}">
+                            <Entry Text="{Binding StudentIDEntry}" Style="{StaticResource EntryStyle}" ToolTipProperties.Text="Required. Numeric values only"/>
+                        </Border>
+                    </HorizontalStackLayout>
+                    <!--FIRST NAME-->
+                    <HorizontalStackLayout>
+                        <Label Text="First Name" Style="{StaticResource LabelStyle}"/>
+                        <Border Style="{StaticResource BorderEntryStyle}">
+                            <Entry Text="{Binding NewStudent.FirstName}" Style="{StaticResource EntryStyle}" ToolTipProperties.Text="Required"/>
+                        </Border>
+                    </HorizontalStackLayout>
+                    <!--LAST NAME-->
+                    <HorizontalStackLayout>
+                        <Label Text="Last Name" Style="{StaticResource LabelStyle}"/>
+                        <Border Style="{StaticResource BorderEntryStyle}">
+                            <Entry Text="{Binding NewStudent.LastName}" Style="{StaticResource EntryStyle}" ToolTipProperties.Text="Required"/>
+                        </Border>
+                    </HorizontalStackLayout>
+                        <!--EMAIL-->
+                    <HorizontalStackLayout>
+                        <Label Text="Email"  Style="{StaticResource LabelStyle}"/>
+                        <Border Style="{StaticResource BorderEntryStyle}">
+                            <Entry Text="{Binding NewStudent.Email}" Style="{StaticResource EntryStyle}" ToolTipProperties.Text="Required"/>
+                        </Border>
+                    </HorizontalStackLayout>
+                    <!--PASSWORD-->
+                    <HorizontalStackLayout>
+                        <Label Text="Password"  Style="{StaticResource LabelStyle}"/>
+                        <Border Style="{StaticResource BorderEntryStyle}">
+                            <Entry Text="{Binding NewStudent.Password}" Style="{StaticResource EntryStyle}" IsPassword="True" ToolTipProperties.Text="Required. Minimum of 8 characters."/>
+                        </Border>
+                    </HorizontalStackLayout>
+                    <!--CONFIRM PASSWORD-->
+                    <HorizontalStackLayout>
+                        <Label Text="Confirm Password"  Style="{StaticResource LabelStyle}"/>
+                        <Border Style="{StaticResource BorderEntryStyle}">
+                            <Entry Text="{Binding NewStudent.ConfirmPassword}" Style="{StaticResource EntryStyle}" IsPassword="True"/>
+                        </Border>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+                
+            <!--Column 2-->
+            <VerticalStackLayout Margin="30,0,0,0">
+                <HorizontalStackLayout>
+                    <!--Tags-->
+                    <VerticalStackLayout>
+                        <!--GENDER-->
+                        <HorizontalStackLayout Padding="0,13" Margin="0,5">
+                            <Label Text="Gender" FontAttributes="Bold"
+                                   />
+                        </HorizontalStackLayout>
+                        <!--BIRTH DATE-->
+                        <HorizontalStackLayout Padding="0,13" Margin="0,5">
+                            <Label Text="Birth Date" FontAttributes="Bold"
+                                   />
+                        </HorizontalStackLayout>
+                        <!--MOBILE NO-->
+                        <HorizontalStackLayout Padding="0,13" Margin="0,5">
+                            <Label Text="Mobile No." FontAttributes="Bold"
+                                   />
+                        </HorizontalStackLayout>
+                        <!--CITY-->
+                        <HorizontalStackLayout Padding="0,13" Margin="0,5">
+                            <Label Text="City" FontAttributes="Bold"
+                                   />
+                        </HorizontalStackLayout>
+                        <!--SCHOOL PROGRAM-->
+                        <HorizontalStackLayout Padding="0,13" Margin="0,5">
+                            <Label Text="School Program" FontAttributes="Bold"
+                                   />
+                        </HorizontalStackLayout>
+                        <!--COURSE-->
+                        <HorizontalStackLayout Padding="0,13" Margin="0,5">
+                            <Label Text="Course" FontAttributes="Bold"
+                                   />
+                        </HorizontalStackLayout>
+                        <!--YEAR LEVEL-->
+                        <HorizontalStackLayout Padding="0,13" Margin="0,5">
+                            <Label Text="Year Level" FontAttributes="Bold"
+                                   />
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                    <!--Options-->
+                    <VerticalStackLayout>
+                        <!--GENDER ENTRY-->
+                        <HorizontalStackLayout Margin="15,5" Padding="0,1">
+                            <RadioButton x:Name="rdoMale" Content="Male" Margin="10,0"
+                                         GroupName="rdoGender"/>
+                            <RadioButton x:Name="rdoFemale" Content="Female"
+                                         GroupName="rdoGender"/>
+                        </HorizontalStackLayout>
+                        <!--BIRTH DATE ENTRY-->
+                        <HorizontalStackLayout Margin="30,5,0,5">
+                            <Border Stroke="Black">
+                                <DatePicker x:Name="dateBirthDay"
+                                    WidthRequest="200"/>
+                            </Border>
+                        </HorizontalStackLayout>
+                        <!--MOBILE NO ENTRY-->
+                        <HorizontalStackLayout Margin="30,5,0,5">
+                            <Border Stroke="Black">
+                                <Entry x:Name="txtMobileNo" WidthRequest="200"/>
+                            </Border>
+                        </HorizontalStackLayout>
+                        <!--CITY ENTRY-->
+                        <HorizontalStackLayout Margin="30,5,0,5">
+                            <Border Stroke="Black">
+                                <Entry x:Name="txtCity"
+                                    WidthRequest="200"/>
+                            </Border>
+                        </HorizontalStackLayout>
+                        <!--SCHOOL PROGRAM ENTRY-->
+                        <HorizontalStackLayout Margin="30,5,0,5">
+                            <Border Stroke="Black">
+                                <Picker x:Name="cboSchoolProgram" Title="-SELECT-" ItemDisplayBinding="{Binding }"  WidthRequest="200"/>
+                            </Border>
+                        </HorizontalStackLayout>
+                        <!--COURSE ENTRY-->
+                        <HorizontalStackLayout Margin="30,5,0,5">
+                            <Border Stroke="Black">
+                                <Picker x:Name="cboCourse" Title="-SELECT-" ItemDisplayBinding="{Binding CourseName}" WidthRequest="200"/>
+                            </Border>
+                        </HorizontalStackLayout>
+                        <!--YEAR LEVEL ENTRY-->
+                        <HorizontalStackLayout Margin="30,5,0,5">
+                            <Border Stroke="Black">
+                                <Picker x:Name="cboYearLevel" Title="-SELECT-" ItemDisplayBinding="{Binding stringYearLevel}" WidthRequest="200"/>
+                            </Border>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout HorizontalOptions="Center" Margin="0,20,0,20">
+            <VerticalStackLayout Margin="10,0">
+                <Button Text="Submit"
+                        BackgroundColor="Blue"
+                        WidthRequest="100"/>
+            </VerticalStackLayout>
+            <VerticalStackLayout Margin="10,0">
+                <Button Text="Reset"
+                        BackgroundColor="Gray"
+                        WidthRequest="100"/>
+            </VerticalStackLayout>
+        </HorizontalStackLayout>
     </VerticalStackLayout>
 </ContentPage>
