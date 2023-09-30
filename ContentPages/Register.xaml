@@ -79,10 +79,10 @@
             <!--Column 2-->
             <VerticalStackLayout>
                 <!--GENDER-->
-                <HorizontalStackLayout>
+                <HorizontalStackLayout RadioButtonGroup.GroupName="Gender" RadioButtonGroup.SelectedValue="{Binding NewStudent.Gender}">
                     <Label Text="Gender" Style="{StaticResource LabelStyle}"/>
-                    <RadioButton Content="Male"/>
-                    <RadioButton Content="Female"/>
+                    <RadioButton Content="Male" Value="Male"/>
+                    <RadioButton Content="Female" Value="Female"/>
                 </HorizontalStackLayout>
                 <!--BIRTH DATE-->
                 <HorizontalStackLayout>
