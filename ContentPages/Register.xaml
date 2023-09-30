@@ -109,21 +109,23 @@
                 <HorizontalStackLayout>
                     <Label Text="School Program" Style="{StaticResource LabelStyle}"/>
                     <Border Style="{StaticResource BorderEntryStyle}">
-                        <Picker x:Name="cboSchoolProgram" ItemDisplayBinding="{Binding }" Style="{StaticResource PickerEntryStyle}"/>
+                        <Picker SelectedIndexChanged="{Binding }" SelectedIndex="{Binding SchoolProgramIndex}" ItemsSource="{Binding SchoolProgram}" SelectedItem="{Binding NewStudent.SchoolProgram}" Style="{StaticResource PickerEntryStyle}"/>
                     </Border>
+                    <Label Text="{Binding NewStudent.SchoolProgram}"/>
+                    <Label Text="{Binding SchoolProgramIndex}"/>
                 </HorizontalStackLayout>
                 <!--COURSE-->
                 <HorizontalStackLayout>
                     <Label Text="Course" Style="{StaticResource LabelStyle}"/>
                     <Border Style="{StaticResource BorderEntryStyle}">
-                        <Picker x:Name="cboCourse" ItemDisplayBinding="{Binding CourseName}" Style="{StaticResource PickerEntryStyle}"/>
+                        <Picker ItemsSource="{Binding Courses}" SelectedItem="{Binding NewStudent.Course}" Style="{StaticResource PickerEntryStyle}"/>
                     </Border>
                 </HorizontalStackLayout>
                 <!--YEAR LEVEL-->
                 <HorizontalStackLayout>
                     <Label Text="Year Level" Style="{StaticResource LabelStyle}"/>
                     <Border Style="{StaticResource BorderEntryStyle}">
-                        <Picker x:Name="cboYearLevel" ItemDisplayBinding="{Binding stringYearLevel}" Style="{StaticResource PickerEntryStyle}"/>
+                        <Picker x:Name="cboYearLevel" ItemDisplayBinding="{Binding stringYearLevel}" SelectedItem="{Binding NewStudent.YearLevel}" Style="{StaticResource PickerEntryStyle}"/>
                     </Border>
                 </HorizontalStackLayout>
             </VerticalStackLayout>
