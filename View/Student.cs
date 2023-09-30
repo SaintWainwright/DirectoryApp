@@ -16,7 +16,7 @@ namespace DirectoryApp.View
         private string password;
         private string confirmPassword;
         private string gender;
-        private DateTime birthDate;
+        private DateTime birthDate = DateTime.Today;
         private string mobileNo;
         private string city;
         private string schoolProgram;

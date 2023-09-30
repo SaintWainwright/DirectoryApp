@@ -88,7 +88,7 @@
                 <HorizontalStackLayout>
                     <Label Text="Birth Date" Style="{StaticResource LabelStyle}"/>
                     <Border Style="{StaticResource BorderEntryStyle}">
-                        <DatePicker x:Name="dateBirthDay" Style="{StaticResource DatePickerEntryStyle}"/>
+                        <DatePicker MaximumDate="{Binding MaxDate}" Date="{Binding NewStudent.BirthDate}" Style="{StaticResource DatePickerEntryStyle}" Format="mm/dd/yyyy"/>
                     </Border>
                 </HorizontalStackLayout>
                 <!--MOBILE NO-->

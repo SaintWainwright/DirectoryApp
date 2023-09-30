@@ -47,5 +47,11 @@ namespace DirectoryApp.ViewModels
                 }
             }
         }
+        private DateTime maxDate = DateTime.Today;
+        public DateTime MaxDate
+        {
+            get { return maxDate; }
+            set { maxDate = value; }
+        }
     }
 }
