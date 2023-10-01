@@ -9,7 +9,7 @@ namespace DirectoryApp.View
 {
     public class Student : MainViewModel
     {
-        private int studentID;
+        private string studentID;
         private string firstName;
         private string lastName;
         private string email;
@@ -23,7 +23,7 @@ namespace DirectoryApp.View
         private string course;
         private string yearLevel;
 
-        public int StudentID
+        public string StudentID
         {
             get { return studentID; }
             set { studentID = value; OnPropertyChanged(); OnPropertyChanged(nameof(studentID)); }

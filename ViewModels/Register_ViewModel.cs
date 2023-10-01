@@ -39,10 +39,9 @@ namespace DirectoryApp.ViewModels
                 _StudentIDEntry = value;
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(_StudentIDEntry));
-                int intOnly;
-                if ((int.TryParse(value, out intOnly)) || String.IsNullOrEmpty(StudentIDEntry))
+                if (isNumber(StudentIDEntry) || String.IsNullOrEmpty(StudentIDEntry))
                 {
-                    NewStudent.StudentID = intOnly;
+                    NewStudent.StudentID = StudentIDEntry;
                 }
                 else
                 {
@@ -67,10 +66,9 @@ namespace DirectoryApp.ViewModels
                 _MobileNoEntry = value;
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(_MobileNoEntry));
-                int intOnly;
-                if ((int.TryParse(value, out intOnly)) || String.IsNullOrEmpty(_MobileNoEntry))
+                if (isNumber(MobileNoEntry) || String.IsNullOrEmpty(MobileNoEntry))
                 {
-                    NewStudent.MobileNo = intOnly.ToString();
+                    NewStudent.MobileNo = MobileNoEntry;
                 }
                 else
                 {
@@ -214,7 +212,6 @@ namespace DirectoryApp.ViewModels
                 "Other"
             };
         }
-
         //ResetButtion
         private void Reset()
         {
@@ -233,5 +230,107 @@ namespace DirectoryApp.ViewModels
             NewStudent.YearLevel = string.Empty;
         }
         public ICommand ResetCommand => new Command(Reset);
+
+        //Validate Form
+        private bool ValidateForm()
+        {
+            bool allFieldsFilled = false;
+            if (!string.IsNullOrWhiteSpace(StudentIDEntry) &&
+                !string.IsNullOrWhiteSpace(NewStudent.FirstName) &&
+                !string.IsNullOrWhiteSpace(NewStudent.LastName) &&
+                !string.IsNullOrWhiteSpace(NewStudent.Email) &&
+                !string.IsNullOrWhiteSpace(NewStudent.Password) &&
+                !string.IsNullOrWhiteSpace(NewStudent.ConfirmPassword) &&
+                !string.IsNullOrWhiteSpace(NewStudent.Gender) &&
+                !string.IsNullOrWhiteSpace(NewStudent.City) &&
+                !string.IsNullOrWhiteSpace(SchoolProgramPicker) &&
+                !string.IsNullOrWhiteSpace(NewStudent.YearLevel) &&
+                !string.IsNullOrWhiteSpace(NewStudent.Course))
+            {
+                allFieldsFilled = true;
+            }
+
+            return allFieldsFilled;
+        }
+        private bool CheckSamePassword()
+        {
+            return (NewStudent.Password == NewStudent.ConfirmPassword);
+        }
+        private bool isNumber(string input)
+        {
+            return int.TryParse(input, out var number);
+        }
+        private string MissingFields()
+        {
+            string ConcatonateString = string.Empty;
+            if (!ValidateForm())
+            {
+                if (string.IsNullOrWhiteSpace(StudentIDEntry))
+                {
+                    ConcatonateString += "Student ID \n";
+                }
+                if (string.IsNullOrWhiteSpace(NewStudent.FirstName))
+                {
+                    ConcatonateString += "First Name \n";
+                }
+                if (string.IsNullOrWhiteSpace(NewStudent.LastName))
+                {
+                    ConcatonateString += "Last Name \n";
+                }
+                if (string.IsNullOrWhiteSpace(NewStudent.Email))
+                {
+                    ConcatonateString += "Email \n";
+                }
+                if (string.IsNullOrWhiteSpace(NewStudent.Password))
+                {
+                    ConcatonateString += "Password \n";
+                }
+                if (string.IsNullOrWhiteSpace(NewStudent.ConfirmPassword))
+                {
+                    ConcatonateString += "Confirm Password \n";
+                }
+                if (string.IsNullOrWhiteSpace(NewStudent.Gender))
+                {
+                    ConcatonateString += "Gender \n";
+                }
+                if (string.IsNullOrWhiteSpace(MobileNoEntry))
+                {
+                    ConcatonateString += "Mobile No. \n";
+                }
+                if (string.IsNullOrWhiteSpace(NewStudent.City))
+                {
+                    ConcatonateString += "City \n";
+                }
+                if (string.IsNullOrWhiteSpace(NewStudent.SchoolProgram))
+                {
+                    ConcatonateString += "School Program \n";
+                }
+                if (string.IsNullOrWhiteSpace(NewStudent.Course))
+                {
+                    ConcatonateString += "Course \n";
+                }
+                if (string.IsNullOrWhiteSpace(NewStudent.YearLevel))
+                {
+                    ConcatonateString += "Year Level \n";
+                }
+            }
+            return ConcatonateString;
+        }
+        private void Submit()
+        {
+            if (!ValidateForm())
+            {
+                Application.Current.MainPage.DisplayAlert("The Following Fields Are Empty", MissingFields(), "Continue");
+            }
+            else if (!CheckSamePassword())
+            {
+                Application.Current.MainPage.DisplayAlert("Passwords Not Matching!", "Please input same password on both entries", "Continue");
+            }
+            else
+            {
+                //Register Function
+            }
+        }
+        public ICommand SubmitCommand => new Command(Submit);
     }
 }
