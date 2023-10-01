@@ -14,17 +14,21 @@
             <Setter Property="FontAttributes" Value="Bold"/>
         </Style>
         <Style x:Key="EntryStyle" TargetType="Entry">
-            <Setter Property="WidthRequest" Value="200"/>
+            <Setter Property="WidthRequest" Value="250"/>
         </Style>
         <Style x:Key="BorderEntryStyle" TargetType="Border">
             <Setter Property="Margin" Value="0,2.5"/>
             <Setter Property="Stroke" Value="Black"/>
         </Style>
         <Style x:Key="PickerEntryStyle" TargetType="Picker">
-            <Setter Property="WidthRequest" Value="200"/>
+            <Setter Property="WidthRequest" Value="250"/>
+            <Setter Property="Title" Value="-SELECT"/>
         </Style>
         <Style x:Key="DatePickerEntryStyle" TargetType="DatePicker">
-            <Setter Property="WidthRequest" Value="200"/>
+            <Setter Property="WidthRequest" Value="250"/>
+        </Style>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="WidthRequest" Value="100"/>
         </Style>
     </ContentPage.Resources>
     
@@ -109,10 +113,8 @@
                 <HorizontalStackLayout>
                     <Label Text="School Program" Style="{StaticResource LabelStyle}"/>
                     <Border Style="{StaticResource BorderEntryStyle}">
-                        <Picker SelectedIndexChanged="{Binding }" SelectedIndex="{Binding SchoolProgramIndex}" ItemsSource="{Binding SchoolProgram}" SelectedItem="{Binding NewStudent.SchoolProgram}" Style="{StaticResource PickerEntryStyle}"/>
+                        <Picker ItemsSource="{Binding SchoolProgram}" SelectedItem="{Binding SchoolProgramPicker}" Style="{StaticResource PickerEntryStyle}"/>
                     </Border>
-                    <Label Text="{Binding NewStudent.SchoolProgram}"/>
-                    <Label Text="{Binding SchoolProgramIndex}"/>
                 </HorizontalStackLayout>
                 <!--COURSE-->
                 <HorizontalStackLayout>
@@ -125,21 +127,17 @@
                 <HorizontalStackLayout>
                     <Label Text="Year Level" Style="{StaticResource LabelStyle}"/>
                     <Border Style="{StaticResource BorderEntryStyle}">
-                        <Picker x:Name="cboYearLevel" ItemDisplayBinding="{Binding stringYearLevel}" SelectedItem="{Binding NewStudent.YearLevel}" Style="{StaticResource PickerEntryStyle}"/>
+                        <Picker ItemsSource="{Binding YearLevel}" SelectedItem="{Binding NewStudent.YearLevel}" Style="{StaticResource PickerEntryStyle}"/>
                     </Border>
                 </HorizontalStackLayout>
             </VerticalStackLayout>
         </HorizontalStackLayout>
         <HorizontalStackLayout HorizontalOptions="Center">
             <VerticalStackLayout>
-                <Button Text="Submit"
-                        BackgroundColor="Blue"
-                        WidthRequest="100"/>
+                <Button Text="Submit" BackgroundColor="Blue" Style="{StaticResource ButtonStyle}" />
             </VerticalStackLayout>
             <VerticalStackLayout>
-                <Button Text="Reset"
-                        BackgroundColor="Gray"
-                        WidthRequest="100"/>
+                <Button Text="Reset" BackgroundColor="Gray" Style="{StaticResource ButtonStyle}" Command="{Binding ResetCommand}"/>
             </VerticalStackLayout>
         </HorizontalStackLayout>
     </VerticalStackLayout>

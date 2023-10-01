@@ -16,6 +16,7 @@ namespace DirectoryApp.ViewModels
         {
             NewStudent = new Student();
             InitializeSchoolPrograms();
+            InitializeYearLevels();
         }
         private Student _NewStudent;
         public Student NewStudent
@@ -99,6 +100,7 @@ namespace DirectoryApp.ViewModels
             set
             {
                 _Courses = value;
+                OnPropertyChanged();
                 OnPropertyChanged(nameof(_Courses));
             }
         }
@@ -117,40 +119,119 @@ namespace DirectoryApp.ViewModels
         {
             SchoolProgram = new ObservableCollection<string>
             {
-                "-SELECT-",
                 "School of Engineering",
-                "School of Computer Science",
+                "School of Computer Studies",
+                "School of Law",
                 "School of Arts and Sciences",
                 "School of Business and Management",
-                "School of Allied Medical Service",
                 "School of Education",
-                "School of Law",
+                "School of Allied Medical Sciences"
             };
+        }
+        private string _SchoolProgramPicker;
+        public string SchoolProgramPicker
+        {
+            get { return _SchoolProgramPicker; }
+            set
+            {
+                _SchoolProgramPicker = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(_SchoolProgramPicker));
+                NewStudent.SchoolProgram = SchoolProgramPicker;
+                InitializeCourses();
+            }
         }
         public void InitializeCourses()
         {
             Courses = new ObservableCollection<string>();
-            if(SchoolProgramIndex == 1)
+            switch (SchoolProgramPicker)
             {
-                Courses.Add("Computer Engineering");
-                Courses.Add("Civil Engineering");
-                Courses.Add("Industrial Engineering");
-                Courses.Add("Electrical Engineering");
-                Courses.Add("Electronics Engineering");
-                Courses.Add("Mechanical Engineering");
-            }
-            else if(SchoolProgramIndex == 2)
-            {
-                Courses.Add("Information Technology");
-                Courses.Add("Computer Sciences");
-                Courses.Add("Information Systems");
+                case "School of Engineering":
+                    Courses.Add("Bachelor of Science in Civil Engineering");
+                    Courses.Add("Bachelor of Science in Computer Engineering");
+                    Courses.Add("Bachelor of Science in Electrical Engineering");
+                    Courses.Add("Bachelor of Science in Electronics Engineering");
+                    Courses.Add("Bachelor of Science in Industrial Engineering");
+                    Courses.Add("Bachelor of Science in Mechanical Engineering");
+                    break;
+                case "School of Computer Studies":
+                    Courses.Add("Bachelor of Science in Computer Science");
+                    Courses.Add("Bachelor of Science in Information Technology");
+                    Courses.Add("Bachelor of Science in Information Systems");
+                    break;
+                case "School of Law":
+                    Courses.Add("Bachelor of Laws");
+                    break;
+                case "School of Arts and Sciences":
+                    Courses.Add("Bachelor of Arts in Communication");
+                    Courses.Add("Bachelor of Arts in Marketing Communication");
+                    Courses.Add("Bachelor of Arts in Journalism");
+                    Courses.Add("Bachelor of Arts in English Language Studies");
+                    Courses .Add("Bachelor of Science in Biology major in Medical Biology");
+                    Courses.Add("Bachelor of Science in Biology major in Microbiology");
+                    Courses.Add("Bachelor of Science in Psychology");
+                    Courses .Add("Bachelor of Library and Information Science");
+                    Courses.Add("Bachelor of Arts in International Studies");
+                    Courses.Add("Bachelor of Arts in Political Science");
+                    break;
+                case "School of Business and Management":
+                    Courses.Add("Bachelor of Science in Accountancy");
+                    Courses.Add("Bachelor of Science in Management Accounting");
+                    Courses.Add("Bachelor of Science in Business Administration  Financial Management");
+                    Courses.Add("Bachelor of Science in Entrepreneurship");
+                    Courses.Add("Bachelor of Science in Business Administration  Operation Management");
+                    Courses.Add("Bachelor of Science in Business Administration  Marketing Management");
+                    Courses.Add("Bachelor of Science in Business Administration  Human Resource Development Management");
+                    Courses.Add("Bachelor of Science in Hospitality Management major in Food and Beverage");
+                    Courses.Add("Bachelor of Science in Tourism Management");
+                    break;
+                case "School of Education":
+                    Courses.Add("Bachelor of Elementary Education");
+                    Courses.Add("Bachelor of Early Childhood Education");
+                    Courses.Add("Bachelor of Physical Education");
+                    Courses.Add("Bachelor of Secondary Education Major in English");
+                    Courses.Add("Bachelor of Secondary Education Major in Filipino");
+                    Courses.Add("Bachelor of Secondary Education Major in Mathematics");
+                    Courses.Add("Bachelor of Secondary Education Major in Science");
+                    Courses.Add("Bachelor of Special Needs Education-Generalist");
+                    Courses.Add("Bachelor of Special Needs Education major in Early Childhood Education");
+                    Courses.Add("Bachelor of Special Needs Education major in Elementary School Teaching");
+                    break;
+                case "School of Allied Medical Sciences":
+                    Courses.Add("Bachelor of Science in Nursing");
+                    break;
             }
         }
-        public int _SchoolProgramIndex = 0;
-        public int SchoolProgramIndex
+        private void InitializeYearLevels()
         {
-            get { return _SchoolProgramIndex; }
-            set { _SchoolProgramIndex = value; OnPropertyChanged(); OnPropertyChanged(nameof(_SchoolProgramIndex));}
+            YearLevel = new ObservableCollection<string>
+            {
+                "1st Year",
+                "2nd Year",
+                "3rd Year",
+                "4th Year",
+                "5th Year",
+                "Other"
+            };
         }
+
+        //ResetButtion
+        private void Reset()
+        {
+            StudentIDEntry = string.Empty;
+            NewStudent.FirstName = string.Empty;
+            NewStudent.LastName = string.Empty;
+            NewStudent.Email = string.Empty;
+            NewStudent.Password = string.Empty;
+            NewStudent.ConfirmPassword = string.Empty;
+            NewStudent.Gender = string.Empty;
+            NewStudent.BirthDate = DateToday;
+            MobileNoEntry = string.Empty;
+            NewStudent.City = string.Empty;
+            SchoolProgramPicker = string.Empty;
+            NewStudent.Course = string.Empty;
+            NewStudent.YearLevel = string.Empty;
+        }
+        public ICommand ResetCommand => new Command(Reset);
     }
 }
