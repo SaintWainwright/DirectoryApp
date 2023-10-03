@@ -7,6 +7,7 @@ namespace DirectoryApp
         {
             InitializeComponent();
             BindingContext = new MainPage_ViewModel();
+            Shell.Current.Title = "Login Page";
         }
     }
 }

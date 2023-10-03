@@ -8,5 +8,6 @@ public partial class Register : ContentPage
 	{
 		InitializeComponent();
 		BindingContext = new Register_ViewModel();
-	}
+        Shell.Current.Title = "Register";
+    }
 }
