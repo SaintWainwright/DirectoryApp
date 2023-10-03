@@ -27,7 +27,6 @@ namespace DirectoryApp.Service
 
         public ObservableCollection<Student> GetStudents()
         {
-            string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Users.txt");
             if(!File.Exists(filePath)) 
             {
                 return new ObservableCollection<Student>();

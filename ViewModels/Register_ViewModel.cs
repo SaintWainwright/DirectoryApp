@@ -238,7 +238,7 @@ namespace DirectoryApp.ViewModels
         private bool ValidateForm()
         {
             bool allFieldsFilled = false;
-            if (!string.IsNullOrWhiteSpace(StudentIDEntry) &&
+            if ((!string.IsNullOrWhiteSpace(StudentIDEntry) )&&
                 !string.IsNullOrWhiteSpace(NewStudent.FirstName) &&
                 !string.IsNullOrWhiteSpace(NewStudent.LastName) &&
                 !string.IsNullOrWhiteSpace(NewStudent.Email) &&
@@ -255,13 +255,24 @@ namespace DirectoryApp.ViewModels
 
             return allFieldsFilled;
         }
+        private bool CheckStudentIDExisting()
+        {
+            foreach (var studentListed in studentServices.GetStudents())
+            {
+                if (StudentIDEntry == studentListed.StudentID)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return false;
+        }
         private bool CheckSamePassword()
         {
             return (NewStudent.Password == NewStudent.ConfirmPassword);
-        }
-        private bool isNumber(string input)
-        {
-            return double.TryParse(input, out var number);
         }
         private string MissingFields()
         {
@@ -323,16 +334,20 @@ namespace DirectoryApp.ViewModels
         {
             if (!ValidateForm())
             {
-                Application.Current.MainPage.DisplayAlert("The Following Fields Are Empty", MissingFields(), "Continue");
+                Shell.Current.DisplayAlert("The Following Fields Are Empty", MissingFields(), "Continue");
             }
             else if (!CheckSamePassword())
             {
-                Application.Current.MainPage.DisplayAlert("Passwords Not Matching!", "Please input same password on both entries", "Continue");
+                Shell.Current.DisplayAlert("Passwords Not Matching!", "Please input same password on both entries", "Continue");
+            }
+            else if(CheckStudentIDExisting())
+            {
+                Shell.Current.DisplayAlert("Student ID Existing!", "ID and user already exists. Please enter a new user to register", "Okay");
             }
             else
             {
                 studentServices.AddStudent(NewStudent);
-                Application.Current.MainPage.DisplayAlert("Register Success!", "Sucessfully Registered your Account", "Continue");
+                Shell.Current.DisplayAlert("Register Success!", "Sucessfully Registered your Account", "Continue");
                 Shell.Current.GoToAsync("..");
             }
         }
