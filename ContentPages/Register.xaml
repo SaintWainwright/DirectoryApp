@@ -40,7 +40,7 @@
                 <HorizontalStackLayout>
                     <Label Text="Student ID" Style="{StaticResource LabelStyle}"/>
                     <Border Style="{StaticResource BorderEntryStyle}">
-                        <Entry Text="{Binding StudentIDEntry}" Style="{StaticResource EntryStyle}" ToolTipProperties.Text="Required. Numeric values only"/>
+                        <Entry Text="{Binding StudentIDEntry}" Style="{StaticResource EntryStyle}" ToolTipProperties.Text="Required. Numeric values only" MaxLength="5"/>
                     </Border>
                 </HorizontalStackLayout>
                 <!--FIRST NAME-->
@@ -99,7 +99,7 @@
                 <HorizontalStackLayout>
                     <Label Text="Mobile No." Style="{StaticResource LabelStyle}"/>
                     <Border Style="{StaticResource BorderEntryStyle}">
-                        <Entry Text="{Binding MobileNoEntry}" Style="{StaticResource EntryStyle}" ToolTipProperties.Text="Number Input"/>
+                        <Entry Text="{Binding MobileNoEntry}" Style="{StaticResource EntryStyle}" ToolTipProperties.Text="Number Input" MaxLength="11" Keyboard="Numeric"/>
                     </Border>
                 </HorizontalStackLayout>
                 <!--CITY-->

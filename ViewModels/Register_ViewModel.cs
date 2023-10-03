@@ -45,7 +45,7 @@ namespace DirectoryApp.ViewModels
                 }
                 else
                 {
-                    Application.Current.MainPage.DisplayAlert("Student ID", "Required. Numeric values only", "Okay");
+                    Application.Current.MainPage.DisplayAlert("Student ID", "Required. Numeric values only & Only 5 Digits", "Okay");
                 }
             }
         }
@@ -66,7 +66,7 @@ namespace DirectoryApp.ViewModels
                 _MobileNoEntry = value;
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(_MobileNoEntry));
-                if (isNumber(MobileNoEntry) || String.IsNullOrEmpty(MobileNoEntry))
+                if ((isNumber(MobileNoEntry) || String.IsNullOrEmpty(MobileNoEntry)) )
                 {
                     NewStudent.MobileNo = MobileNoEntry;
                 }
@@ -165,10 +165,10 @@ namespace DirectoryApp.ViewModels
                     Courses.Add("Bachelor of Arts in Marketing Communication");
                     Courses.Add("Bachelor of Arts in Journalism");
                     Courses.Add("Bachelor of Arts in English Language Studies");
-                    Courses .Add("Bachelor of Science in Biology major in Medical Biology");
+                    Courses.Add("Bachelor of Science in Biology major in Medical Biology");
                     Courses.Add("Bachelor of Science in Biology major in Microbiology");
                     Courses.Add("Bachelor of Science in Psychology");
-                    Courses .Add("Bachelor of Library and Information Science");
+                    Courses.Add("Bachelor of Library and Information Science");
                     Courses.Add("Bachelor of Arts in International Studies");
                     Courses.Add("Bachelor of Arts in Political Science");
                     break;
@@ -258,7 +258,7 @@ namespace DirectoryApp.ViewModels
         }
         private bool isNumber(string input)
         {
-            return int.TryParse(input, out var number);
+            return double.TryParse(input, out var number);
         }
         private string MissingFields()
         {
