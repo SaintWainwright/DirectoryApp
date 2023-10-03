@@ -39,7 +39,7 @@ namespace DirectoryApp.ViewModels
                 _StudentIDEntry = value;
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(_StudentIDEntry));
-                if (isNumber(StudentIDEntry) || String.IsNullOrEmpty(StudentIDEntry))
+                if (StudentIDEntry.All(char.IsDigit) || String.IsNullOrEmpty(StudentIDEntry))
                 {
                     NewStudent.StudentID = StudentIDEntry;
                 }
@@ -66,7 +66,7 @@ namespace DirectoryApp.ViewModels
                 _MobileNoEntry = value;
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(_MobileNoEntry));
-                if ((isNumber(MobileNoEntry) || String.IsNullOrEmpty(MobileNoEntry)) )
+                if (MobileNoEntry.All(char.IsDigit) || String.IsNullOrEmpty(MobileNoEntry))
                 {
                     NewStudent.MobileNo = MobileNoEntry;
                 }
@@ -328,7 +328,8 @@ namespace DirectoryApp.ViewModels
             }
             else
             {
-                //Register Function
+                Application.Current.MainPage.DisplayAlert("Register Success!", "Sucessfully Registered your Account", "Continue");
+                Shell.Current.GoToAsync("..");
             }
         }
         public ICommand SubmitCommand => new Command(Submit);

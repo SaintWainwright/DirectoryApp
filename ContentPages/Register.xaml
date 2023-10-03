@@ -22,6 +22,7 @@
         </Style>
         <Style x:Key="BorderEntryStyle" TargetType="Border">
             <Setter Property="Margin" Value="0,2.5"/>
+            <Setter Property="WidthRequest" Value="250"/>
             <Setter Property="Stroke" Value="Black"/>
         </Style>
         <Style x:Key="PickerEntryStyle" TargetType="Picker">
@@ -138,7 +139,7 @@
         </HorizontalStackLayout>
         <HorizontalStackLayout HorizontalOptions="Center">
             <VerticalStackLayout>
-                <Button Text="Submit" BackgroundColor="Blue" Style="{StaticResource ButtonStyle}" />
+                <Button Text="Submit" BackgroundColor="Blue" Style="{StaticResource ButtonStyle}" Command="{Binding SubmitCommand}"/>
             </VerticalStackLayout>
             <VerticalStackLayout>
                 <Button Text="Reset" BackgroundColor="Gray" Style="{StaticResource ButtonStyle}" Command="{Binding ResetCommand}"/>

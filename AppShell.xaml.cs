@@ -8,6 +8,7 @@ namespace DirectoryApp
             InitializeComponent();
 
             //RegisterRouting
+            Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
             Routing.RegisterRoute(nameof(Register), typeof(Register));
         }
     }
