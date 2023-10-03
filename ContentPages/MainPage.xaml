@@ -5,6 +5,19 @@
              xmlns:viewmodel="clr-namespace:DirectoryApp.ViewModels"
              x:DataType="viewmodel:MainPage_ViewModel">
 
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="False" IsEnabled="False" />
+    </Shell.BackButtonBehavior>
+
+    <ContentPage.Resources>
+        <Style x:Key="EntryStyle" TargetType="Entry">
+            <Setter Property="WidthRequest" Value="500"/>
+        </Style>
+        <Style x:Key="BorderEntryStyle" TargetType="Border">
+            <Setter Property="Margin" Value="0,2.5"/>
+            <Setter Property="Stroke" Value="Black"/>
+        </Style>
+    </ContentPage.Resources>
     
     <VerticalStackLayout
         HorizontalOptions="Center"
@@ -18,10 +31,10 @@
         <!--Enter Username-->
         <HorizontalStackLayout
             Padding="10,0,10,0">
-            <Border>
+            <Border Style="{StaticResource BorderEntryStyle}">
                 <Entry 
                     Placeholder="Enter Username" PlaceholderColor="Gray"
-                    WidthRequest="604"
+                    Style="{StaticResource EntryStyle}"
                     Text="{Binding txtUsername}"/>
             </Border>
         </HorizontalStackLayout>
@@ -35,10 +48,10 @@
         <!--Enter Password-->
         <HorizontalStackLayout
             Padding="10,0,10,0">
-            <Border>
+            <Border Style="{StaticResource BorderEntryStyle}">
                 <Entry
                     Placeholder="Enter Password" PlaceholderColor="Gray"
-                    WidthRequest="604"
+                    Style="{StaticResource EntryStyle}"
                     IsPassword="True"
                     Text="{Binding txtPassword}"/>
             </Border>

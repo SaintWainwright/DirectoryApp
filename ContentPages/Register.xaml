@@ -5,7 +5,11 @@
              Title="Register"
              xmlns:viewmodel="clr-namespace:DirectoryApp.ViewModels"
              x:DataType="viewmodel:Register_ViewModel">
-    
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="False" IsEnabled="False" />
+    </Shell.BackButtonBehavior>
+
     <ContentPage.Resources>
         <Style x:Key="LabelStyle" TargetType="Label">
             <Setter Property="WidthRequest" Value="125"/>
