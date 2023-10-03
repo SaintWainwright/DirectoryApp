@@ -7,16 +7,19 @@ using DirectoryApp.ContentPages;
 using System.Windows.Input;
 using DirectoryApp.View;
 using System.Collections.ObjectModel;
+using DirectoryApp.Service;
 
 namespace DirectoryApp.ViewModels
 {
     public partial class Register_ViewModel : MainViewModel
     {
+        private readonly StudentServices studentServices;
         public Register_ViewModel()
         {
             NewStudent = new Student();
             InitializeSchoolPrograms();
             InitializeYearLevels();
+            studentServices = new StudentServices();
         }
         private Student _NewStudent;
         public Student NewStudent
@@ -328,6 +331,7 @@ namespace DirectoryApp.ViewModels
             }
             else
             {
+                studentServices.AddStudent(NewStudent);
                 Application.Current.MainPage.DisplayAlert("Register Success!", "Sucessfully Registered your Account", "Continue");
                 Shell.Current.GoToAsync("..");
             }
