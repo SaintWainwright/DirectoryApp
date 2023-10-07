@@ -19,7 +19,6 @@ namespace DirectoryApp.Services
             ObservableCollection<Contact> ContactCollection = GetContacts(student);
             if (contact != null)
             {
-
                 ContactCollection.Add(contact);
                 string contactsFilePath = Path.Combine(filePath, $"S{student.StudentID}.txt");
                 var ContactList = JsonSerializer.Serialize<ObservableCollection<Contact>>(ContactCollection);

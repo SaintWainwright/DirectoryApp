@@ -5,11 +5,95 @@
              xmlns:viewmodel="clr-namespace:DirectoryApp.ViewModels"
              x:DataType="viewmodel:AddContact_ViewModel">
 
-    <Shell.BackButtonBehavior>
-        <BackButtonBehavior IsVisible="False" IsEnabled="False" />
-    </Shell.BackButtonBehavior>
+    <ContentPage.Resources>
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Setter Property="WidthRequest" Value="125"/>
+            <Setter Property="Padding" Value="0,13"/>
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+        </Style>
+        <Style x:Key="EntryStyle" TargetType="Entry">
+            <Setter Property="WidthRequest" Value="250"/>
+        </Style>
+        <Style x:Key="BorderEntryStyle" TargetType="Border">
+            <Setter Property="Margin" Value="0,2.5"/>
+            <Setter Property="WidthRequest" Value="250"/>
+            <Setter Property="Stroke" Value="Black"/>
+        </Style>
+        <Style x:Key="PickerEntryStyle" TargetType="Picker">
+            <Setter Property="WidthRequest" Value="250"/>
+            <Setter Property="Title" Value="-SELECT"/>
+        </Style>
+        <Style x:Key="DatePickerEntryStyle" TargetType="DatePicker">
+            <Setter Property="WidthRequest" Value="250"/>
+        </Style>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="WidthRequest" Value="100"/>
+        </Style>
+    </ContentPage.Resources>
 
-    <VerticalStackLayout>
-        
+    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+        <HorizontalStackLayout RadioButtonGroup.GroupName="ContactType" RadioButtonGroup.SelectedValue="{Binding ContactType}">
+            <Label Text="Type" Style="{StaticResource LabelStyle}"/>
+            <RadioButton Content="Faculty" Value="Faculty"/>
+            <RadioButton Content="Student" Value="Student"/>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout Spacing="30">
+            <!--Column 1-->
+            <VerticalStackLayout>
+                <!--CONTACT ID-->
+                <HorizontalStackLayout>
+                    <Label Text="ID" Style="{StaticResource LabelStyle}"/>
+                    <Border Style="{StaticResource BorderEntryStyle}">
+                        <Entry Text="{Binding ContactIDEntry}" Style="{StaticResource EntryStyle}" ToolTipProperties.Text="Required. Numeric values only" MaxLength="{Binding MaxLength}"/>
+                    </Border>
+                </HorizontalStackLayout>
+                <!--LAST NAME-->
+                <HorizontalStackLayout>
+                    <Label Text="Last Name" Style="{StaticResource LabelStyle}"/>
+                    <Border Style="{StaticResource BorderEntryStyle}">
+                        <Entry Text="{Binding NewContact.LastName}" Style="{StaticResource EntryStyle}" ToolTipProperties.Text="Required"/>
+                    </Border>
+                </HorizontalStackLayout>
+                <!--FIRST NAME-->
+                <HorizontalStackLayout>
+                    <Label Text="First Name" Style="{StaticResource LabelStyle}"/>
+                    <Border Style="{StaticResource BorderEntryStyle}">
+                        <Entry Text="{Binding NewContact.FirstName}" Style="{StaticResource EntryStyle}" ToolTipProperties.Text="Required"/>
+                    </Border>
+                </HorizontalStackLayout>
+                <!--EMAIL-->
+                <HorizontalStackLayout>
+                    <Label Text="Email"  Style="{StaticResource LabelStyle}"/>
+                    <Border Style="{StaticResource BorderEntryStyle}">
+                        <Entry Text="{Binding NewContact.Email}" Style="{StaticResource EntryStyle}" ToolTipProperties.Text="Required"/>
+                    </Border>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+            <!--Column 2-->
+            <VerticalStackLayout>
+                <!--MOBILE NO-->
+                <HorizontalStackLayout>
+                    <Label Text="Mobile No." Style="{StaticResource LabelStyle}"/>
+                    <Border Style="{StaticResource BorderEntryStyle}">
+                        <Entry Text="{Binding MobileNoEntry}" Style="{StaticResource EntryStyle}" ToolTipProperties.Text="Number Input" MaxLength="11" Keyboard="Numeric"/>
+                    </Border>
+                </HorizontalStackLayout>
+                <!--SCHOOL PROGRAM-->
+                <HorizontalStackLayout>
+                    <Label Text="School Program" Style="{StaticResource LabelStyle}"/>
+                    <Border Style="{StaticResource BorderEntryStyle}">
+                        <Picker ItemsSource="{Binding SchoolProgram}" SelectedItem="{Binding SchoolProgramPicker}" Style="{StaticResource PickerEntryStyle}"/>
+                    </Border>
+                </HorizontalStackLayout>
+                <!--COURSE-->
+                <HorizontalStackLayout>
+                    <Label Text="Course" Style="{StaticResource LabelStyle}"/>
+                    <Border Style="{StaticResource BorderEntryStyle}">
+                        <Picker ItemsSource="{Binding Courses}" SelectedItem="{Binding NewContact.Course}" Style="{StaticResource PickerEntryStyle}" IsEnabled="{Binding CanPick}"/>
+                    </Border>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </HorizontalStackLayout>
     </VerticalStackLayout>
 </ContentPage>
