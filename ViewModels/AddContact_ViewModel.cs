@@ -8,6 +8,8 @@ using DirectoryApp.Service;
 using DirectoryApp.Services;
 using DirectoryApp.View;
 using Contact = DirectoryApp.View.Contact;
+using System.Windows.Input;
+using DirectoryApp.ContentPages;
 
 namespace DirectoryApp.ViewModels
 {
@@ -142,6 +144,7 @@ namespace DirectoryApp.ViewModels
                 MaxLength = 4;
                 ContactIDEntry = string.Empty;
                 NewContact.Course = string.Empty;
+                NewContact.Course = "N/A";
             }
             else
             {
@@ -159,7 +162,7 @@ namespace DirectoryApp.ViewModels
                 _SchoolProgramPicker = value;
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(_SchoolProgramPicker));
-                NewStudent.SchoolProgram = SchoolProgramPicker;
+                NewContact.SchoolProgram = SchoolProgramPicker;
                 InitializeCourses();
             }
         }
@@ -260,5 +263,87 @@ namespace DirectoryApp.ViewModels
                     break;
             }
         }
+        private void Reset()
+        {
+            ContactType = string.Empty;
+            ContactIDEntry = string.Empty;
+            NewContact.LastName = string.Empty;
+            NewContact.FirstName = string.Empty;
+            NewContact.Email = string.Empty;
+            MobileNoEntry = string.Empty;
+            SchoolProgramPicker = string.Empty;
+            NewContact.Course = string.Empty;
+        }
+        public ICommand ResetCommand => new Command(Reset);
+        private bool ValidateForm()
+        {
+            bool allFieldsFilled = false;
+            if ((!string.IsNullOrWhiteSpace(ContactType))&&
+                !string.IsNullOrWhiteSpace(ContactIDEntry) &&
+                !string.IsNullOrWhiteSpace(NewContact.LastName) &&
+                !string.IsNullOrWhiteSpace(NewContact.FirstName) &&
+                !string.IsNullOrWhiteSpace(NewContact.Email) &&
+                !string.IsNullOrWhiteSpace(MobileNoEntry) &&
+                !string.IsNullOrWhiteSpace(SchoolProgramPicker) &&
+                (!string.IsNullOrWhiteSpace(NewContact.Course) || !CanPick))
+            {
+                allFieldsFilled = true;
+            }
+            return allFieldsFilled;
+        }
+        private string MissingFields()
+        {
+            string ConcatonateString = string.Empty;
+            if (!ValidateForm())
+            {
+                if (string.IsNullOrWhiteSpace(ContactIDEntry))
+                {
+                    ConcatonateString += "Contact ID \n";
+                }
+                if (string.IsNullOrWhiteSpace(NewContact.FirstName))
+                {
+                    ConcatonateString += "First Name \n";
+                }
+                if (string.IsNullOrWhiteSpace(NewContact.LastName))
+                {
+                    ConcatonateString += "Last Name \n";
+                }
+                if (string.IsNullOrWhiteSpace(NewContact.Email))
+                {
+                    ConcatonateString += "Email \n";
+                }
+                if (string.IsNullOrWhiteSpace(ContactType))
+                {
+                    ConcatonateString += "Contact Type \n";
+                }
+                if (string.IsNullOrWhiteSpace(MobileNoEntry))
+                {
+                    ConcatonateString += "Mobile No. \n";
+                }
+                if (string.IsNullOrWhiteSpace(NewContact.SchoolProgram))
+                {
+                    ConcatonateString += "School Program \n";
+                }
+                if (string.IsNullOrWhiteSpace(NewContact.Course))
+                {
+                    ConcatonateString += "Course \n";
+                }
+            }
+            return ConcatonateString;
+        }
+        private void Submit()
+        {
+            if (!ValidateForm())
+            {
+                Shell.Current.DisplayAlert("The Following Fields Are Empty", MissingFields(), "Continue");
+            }
+            else
+            {
+                contactServices.AddContact(NewContact, NewStudent);
+                string StudentID = NewStudent.StudentID;
+                Shell.Current.GoToAsync($"{nameof(Home)}?id={StudentID}");
+            }
+        }
+        public ICommand SubmitCommand => new Command(Submit);
     }
 }

@@ -95,5 +95,13 @@
                 </HorizontalStackLayout>
             </VerticalStackLayout>
         </HorizontalStackLayout>
+        <HorizontalStackLayout HorizontalOptions="Center">
+            <VerticalStackLayout>
+                <Button Text="Submit" BackgroundColor="Blue" Style="{StaticResource ButtonStyle}" Command="{Binding SubmitCommand}"/>
+            </VerticalStackLayout>
+            <VerticalStackLayout>
+                <Button Text="Reset" BackgroundColor="Gray" Style="{StaticResource ButtonStyle}" Command="{Binding ResetCommand}"/>
+            </VerticalStackLayout>
+        </HorizontalStackLayout>
     </VerticalStackLayout>
 </ContentPage>
