@@ -3,11 +3,98 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DirectoryApp.ContentPages.Home"
              xmlns:viewmodel="clr-namespace:DirectoryApp.ViewModels"
-             x:DataType="viewmodel:Home_ViewModel">
-    <VerticalStackLayout>
-        <Label 
-            Text="{Binding StudentID}"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" FontSize="300" />
-    </VerticalStackLayout>
+             x:DataType="viewmodel:Home_ViewModel"
+             xmlns:model="clr-namespace:DirectoryApp.View">
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="False" IsEnabled="False" />
+    </Shell.BackButtonBehavior>
+
+    <ContentPage.Resources>
+        <Style x:Key="BorderStyle" TargetType="Border">
+            <Setter Property="Stroke" Value="black"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="WidthRequest" Value="102.5"/>
+            <Setter Property="HeightRequest" Value="105"/>
+        </Style>
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+        </Style>
+        <Style x:Key="Button" TargetType="Button">
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="HorizontalOptions" Value="End"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="Background" Value="Blue"/>
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+    </ContentPage.Resources>
+    
+    <ScrollView>
+        <VerticalStackLayout Padding="300,150">
+            <Button Text="+" Style="{StaticResource Button}" Command="{Binding AddContactCommand}"/>
+            <Grid ColumnDefinitions="*,*,*,*,*,*,*,*">
+                <Border Grid.Column="0" Style="{StaticResource BorderStyle}">
+                    <Label Text="ID" Style="{StaticResource LabelStyle}"/>
+                </Border>
+                <Border Grid.Column="1" Style="{StaticResource BorderStyle}">
+                    <Label Text="Last Name" Style="{StaticResource LabelStyle}"/>
+                </Border>
+                <Border Grid.Column="2" Style="{StaticResource BorderStyle}">
+                    <Label Text="First Name" Style="{StaticResource LabelStyle}"/>
+                </Border>
+                <Border Grid.Column="3" Style="{StaticResource BorderStyle}">
+                    <Label Text="School Program" Style="{StaticResource LabelStyle}"/>
+                </Border>
+                <Border Grid.Column="4" Style="{StaticResource BorderStyle}">
+                    <Label Text="Course" Style="{StaticResource LabelStyle}"/>
+                </Border>
+                <Border Grid.Column="5" Style="{StaticResource BorderStyle}">
+                    <Label Text="Email" Style="{StaticResource LabelStyle}"/>
+                </Border>
+                <Border Grid.Column="6" Style="{StaticResource BorderStyle}">
+                    <Label Text="Mobile Number" Style="{StaticResource LabelStyle}"/>
+                </Border>
+                <Border Grid.Column="7" Style="{StaticResource BorderStyle}">
+                    <Label Text="Type" Style="{StaticResource LabelStyle}"/>
+                </Border>
+            </Grid>
+
+            <CollectionView ItemsSource="{Binding ContactsList}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Contact">
+                        <Grid ColumnDefinitions="*,*,*,*,*,*,*,*">
+                            <Border Grid.Column="0" Style="{StaticResource BorderStyle}">
+                                <Label Text="{Binding ContactID}" Style="{StaticResource LabelStyle}"/>
+                            </Border>
+                            <Border Grid.Column="1" Style="{StaticResource BorderStyle}">
+                                <Label Text="{Binding LastName}" Style="{StaticResource LabelStyle}"/>
+                            </Border>
+                            <Border Grid.Column="2" Style="{StaticResource BorderStyle}">
+                                <Label Text="{Binding FirstName}" Style="{StaticResource LabelStyle}"/>
+                            </Border>
+                            <Border Grid.Column="3" Style="{StaticResource BorderStyle}">
+                                <Label Text="{Binding SchoolProgram}" Style="{StaticResource LabelStyle}"/>
+                            </Border>
+                            <Border Grid.Column="4" Style="{StaticResource BorderStyle}">
+                                <Label Text="{Binding Course}" Style="{StaticResource LabelStyle}"/>
+                            </Border>
+                            <Border Grid.Column="5" Style="{StaticResource BorderStyle}">
+                                <Label Text="{Binding Email}" Style="{StaticResource LabelStyle}"/>
+                            </Border>
+                            <Border Grid.Column="6" Style="{StaticResource BorderStyle}">
+                                <Label Text="{Binding MobileNo}" Style="{StaticResource LabelStyle}"/>
+                            </Border>
+                            <Border Grid.Column="7" Style="{StaticResource BorderStyle}">
+                                <Label Text="{Binding Type}" Style="{StaticResource LabelStyle}"/>
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
