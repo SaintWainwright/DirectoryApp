@@ -10,6 +10,7 @@ namespace DirectoryApp
             //RegisterRouting
             Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
             Routing.RegisterRoute(nameof(Register), typeof(Register));
+            Routing.RegisterRoute(nameof(Home), typeof(Home));
         }
     }
 }

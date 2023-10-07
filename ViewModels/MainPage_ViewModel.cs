@@ -65,6 +65,7 @@ namespace DirectoryApp.ViewModels
 
         private void OnLogin()
         {
+            
             if ((string.IsNullOrEmpty(txtStudentID)) || (string.IsNullOrEmpty(txtPassword)))
             {
                 MessageDisplay = "Username and/or Password should not be empty. Please try again.";
@@ -73,6 +74,8 @@ namespace DirectoryApp.ViewModels
             else if (AuthenticateLogin())
             {
                 MessageDisplay = "Login Successful";
+                string StudentID = NewStudent.StudentID;
+                Shell.Current.GoToAsync($"{nameof(Home)}?id={StudentID}");
             }
             else
             {
