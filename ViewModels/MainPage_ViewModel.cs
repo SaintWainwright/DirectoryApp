@@ -97,7 +97,7 @@ namespace DirectoryApp.ViewModels
                 {
                     if(txtPassword == studentListed.Password)
                     {
-                        NewStudent.StudentID = studentListed.StudentID;
+                        NewStudent = studentListed;
                         return true;
                     }
                 }
