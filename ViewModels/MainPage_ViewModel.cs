@@ -91,22 +91,17 @@ namespace DirectoryApp.ViewModels
         public ICommand OnNewUserCommand => new Command(OnNewUser);
         private bool AuthenticateLogin()
         {
+            bool exist = false;
             foreach (var studentListed in studentServices.GetStudents())
             {
-                if (txtStudentID == studentListed.StudentID)
+                if (txtStudentID == studentListed.StudentID && txtPassword == studentListed.Password)
                 {
-                    if(txtPassword == studentListed.Password)
-                    {
-                        NewStudent = studentListed;
-                        return true;
-                    }
-                }
-                else
-                {
-                    return false;
+                    NewStudent = studentListed;
+                    exist = true;
+                    
                 }
             }
-            return false;
+            return exist;
         }
     }
 }

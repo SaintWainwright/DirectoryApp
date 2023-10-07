@@ -31,6 +31,7 @@
             <Setter Property="CornerRadius" Value="12"/>
             <Setter Property="Background" Value="Blue"/>
             <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Margin" Value="15"/>
         </Style>
     </ContentPage.Resources>
     

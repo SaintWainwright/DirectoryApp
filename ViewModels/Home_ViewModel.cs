@@ -15,8 +15,8 @@ namespace DirectoryApp.ViewModels
     [QueryProperty(nameof(StudentID), "id")]
     public partial class Home_ViewModel : MainViewModel
     {
-        private readonly ContactServices contactServices = new ContactServices();
-        private readonly StudentServices studentServices = new StudentServices();
+        private readonly ContactServices contactServices = new();
+        private readonly StudentServices studentServices = new();
         private string studentID;
         public string StudentID 
         {

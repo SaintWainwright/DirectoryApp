@@ -339,6 +339,8 @@ namespace DirectoryApp.ViewModels
             }
             else
             {
+                if (NewContact.Type == "Faculty" && NewContact.Course == null)
+                    NewContact.Course = "N/A";
                 contactServices.AddContact(NewContact, NewStudent);
                 string StudentID = NewStudent.StudentID;
                 Shell.Current.GoToAsync($"{nameof(Home)}?id={StudentID}");
