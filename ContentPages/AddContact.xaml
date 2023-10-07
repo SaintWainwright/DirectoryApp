@@ -5,6 +5,10 @@
              xmlns:viewmodel="clr-namespace:DirectoryApp.ViewModels"
              x:DataType="viewmodel:AddContact_ViewModel">
 
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior Command="{Binding BackCommand}"/>
+    </Shell.BackButtonBehavior>
+
     <ContentPage.Resources>
         <Style x:Key="LabelStyle" TargetType="Label">
             <Setter Property="WidthRequest" Value="125"/>

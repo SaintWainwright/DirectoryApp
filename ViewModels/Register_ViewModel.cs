@@ -8,6 +8,7 @@ using System.Windows.Input;
 using DirectoryApp.View;
 using System.Collections.ObjectModel;
 using DirectoryApp.Service;
+using System.Collections;
 
 namespace DirectoryApp.ViewModels
 {
@@ -257,18 +258,15 @@ namespace DirectoryApp.ViewModels
         }
         private bool CheckStudentIDExisting()
         {
+            bool exist = false;
             foreach (var studentListed in studentServices.GetStudents())
             {
                 if (StudentIDEntry == studentListed.StudentID)
                 {
-                    return true;
-                }
-                else
-                {
-                    return false;
+                    exist = true;
                 }
             }
-            return false;
+            return exist;
         }
         private bool CheckSamePassword()
         {

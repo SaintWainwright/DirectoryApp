@@ -291,6 +291,18 @@ namespace DirectoryApp.ViewModels
             }
             return allFieldsFilled;
         }
+        private bool CheckContactIDExisting()
+        {
+            bool exist = false;
+            foreach (var contactListed in contactServices.GetContacts(NewStudent))
+            {
+                if (ContactIDEntry == contactListed.ContactID)
+                {
+                    exist = true;
+                }
+            }
+            return exist;
+        }
         private string MissingFields()
         {
             string ConcatonateString = string.Empty;
@@ -337,6 +349,11 @@ namespace DirectoryApp.ViewModels
             {
                 Shell.Current.DisplayAlert("The Following Fields Are Empty", MissingFields(), "Continue");
             }
+
+            else if (CheckContactIDExisting())
+            {
+                Shell.Current.DisplayAlert("Contact ID Existing!", "ID and user already exists. Please enter a new user to add contact", "Okay");
+            }
             else
             {
                 if (NewContact.Type == "Faculty" && NewContact.Course == null)
@@ -347,5 +364,11 @@ namespace DirectoryApp.ViewModels
             }
         }
         public ICommand SubmitCommand => new Command(Submit);
+        private void Back()
+        {
+            string StudentID = NewStudent.StudentID;
+            Shell.Current.GoToAsync($"{nameof(Home)}?id={StudentID}");
+        }
+        public ICommand BackCommand => new Command(Back);
     }
 }
