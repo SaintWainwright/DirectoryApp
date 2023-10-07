@@ -12,7 +12,7 @@ namespace DirectoryApp.Service
 {
     class StudentServices
     {
-        string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Users.txt");
+        string filePath = Path.Combine(FileSystem.Current.AppDataDirectory, "Users.txt");
 
         public void AddStudent(Student student)
         {

@@ -5,20 +5,39 @@ using System.Text;
 using System.Threading.Tasks;
 using DirectoryApp.ContentPages;
 using System.Windows.Input;
+using DirectoryApp.Service;
+using DirectoryApp.View;
 
 namespace DirectoryApp.ViewModels
 {
     public partial class MainPage_ViewModel : MainViewModel
     {
-        private string _txtUsername = string.Empty;
-        public string txtUsername
+        private readonly StudentServices studentServices;
+        private Student _NewStudent;
+        public Student NewStudent
         {
-            get { return _txtUsername; }
+            get { return _NewStudent; }
             set
             {
-                _txtUsername = value;
+                _NewStudent = value;
                 OnPropertyChanged();
-                OnPropertyChanged(nameof(_txtUsername));
+                OnPropertyChanged(nameof(_NewStudent));
+            }
+        }
+        public MainPage_ViewModel()
+        {
+            NewStudent = new Student(); 
+            studentServices = new StudentServices();
+        }
+        private string _txtStudentID = string.Empty;
+        public string txtStudentID
+        {
+            get { return _txtStudentID; }
+            set
+            {
+                _txtStudentID = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(_txtStudentID));
             }
         }
         private string _txtPassword = string.Empty;
@@ -46,14 +65,12 @@ namespace DirectoryApp.ViewModels
 
         private void OnLogin()
         {
-            string adminUsername = "admin123";
-            string adminPassword = "password123";
-            if ((string.IsNullOrEmpty(txtUsername)) || (string.IsNullOrEmpty(txtPassword)))
+            if ((string.IsNullOrEmpty(txtStudentID)) || (string.IsNullOrEmpty(txtPassword)))
             {
                 MessageDisplay = "Username and/or Password should not be empty. Please try again.";
             }
 
-            else if (adminUsername == txtUsername && adminPassword == txtPassword)
+            else if (AuthenticateLogin())
             {
                 MessageDisplay = "Login Successful";
             }
@@ -69,5 +86,24 @@ namespace DirectoryApp.ViewModels
             Shell.Current.GoToAsync(nameof(Register));
         }
         public ICommand OnNewUserCommand => new Command(OnNewUser);
+        private bool AuthenticateLogin()
+        {
+            foreach (var studentListed in studentServices.GetStudents())
+            {
+                if (txtStudentID == studentListed.StudentID)
+                {
+                    if(txtPassword == studentListed.Password)
+                    {
+                        NewStudent.StudentID = studentListed.StudentID;
+                        return true;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return false;
+        }
     }
 }

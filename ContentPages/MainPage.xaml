@@ -27,7 +27,7 @@
         <!--Enter Username-->
         <HorizontalStackLayout Padding="10,0,10,0">
             <Border Style="{StaticResource BorderEntryStyle}">
-                <Entry Placeholder="Enter Username" PlaceholderColor="Gray" Style="{StaticResource EntryStyle}" Text="{Binding txtUsername}"/>
+                <Entry Placeholder="Enter Username" PlaceholderColor="Gray" Style="{StaticResource EntryStyle}" Text="{Binding txtStudentID}"/>
             </Border>
         </HorizontalStackLayout>
         <!--Password-->

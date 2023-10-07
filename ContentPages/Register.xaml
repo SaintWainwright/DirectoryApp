@@ -6,10 +6,6 @@
              xmlns:viewmodel="clr-namespace:DirectoryApp.ViewModels"
              x:DataType="viewmodel:Register_ViewModel">
 
-    <Shell.BackButtonBehavior>
-        <BackButtonBehavior IsVisible="False" IsEnabled="False" />
-    </Shell.BackButtonBehavior>
-
     <ContentPage.Resources>
         <Style x:Key="LabelStyle" TargetType="Label">
             <Setter Property="WidthRequest" Value="125"/>
@@ -79,7 +75,7 @@
                 <!--CONFIRM PASSWORD-->
                 <HorizontalStackLayout>
                     <Label Text="Confirm Password" WidthRequest="66" Margin="0,0,59,0" Style="{StaticResource LabelStyle}"/>
-                    <Border Style="{StaticResource BorderEntryStyle}">
+                    <Border Style="{StaticResource BorderEntryStyle}" HeightRequest="51">
                         <Entry Text="{Binding NewStudent.ConfirmPassword}" Style="{StaticResource EntryStyle}" IsPassword="True"/>
                     </Border>
                 </HorizontalStackLayout>
