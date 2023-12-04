@@ -10,40 +10,46 @@
             Padding="500,0"
             VerticalOptions="Center">
             
-            
             <Label
                 Text="Username"
                 FontSize="15"
                 FontAttributes="Bold"
                 />
-            
-            <Entry 
-                Placeholder="Enter Username" PlaceholderColor="Gray"
-                WidthRequest="200"
-                x:Name="entryUsername"
-               />
+
+            <Border>
+                <Entry 
+                    Placeholder="Enter Username" PlaceholderColor="Gray"
+                    WidthRequest="600"
+                    x:Name="entryUsername"
+                   />
+            </Border>
 
             <Label
                 Text="Password"
                 FontSize="15"
                 FontAttributes="Bold"
                 />
-            <Entry
-                Placeholder="Enter Password" PlaceholderColor="Gray"
-                WidthRequest="200"
-                IsPassword="True"
-                x:Name="entryPassword"
-                />
+            
+            <Border>
+                <Entry
+                    Placeholder="Enter Password" PlaceholderColor="Gray"
+                    WidthRequest="600"
+                    IsPassword="True"
+                    x:Name="entryPassword"
+                    />
+            </Border>
+            
             <Button
                 Text="Login"
                 BackgroundColor="Blue"
                 WidthRequest="100"
                 Clicked="OnLoginClick"
                 />
-
+ 
             <Label
                 x:Name="MessageDisplay"
                 IsVisible="True"
+                HorizontalOptions="Center"
                />
         </VerticalStackLayout>
     </ScrollView>
